@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Night Club Themed Bowling Game</title>
+    
+    <!-- A-Frame Library -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    
+    <!-- Physics System (optional) -->
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.0/dist/aframe-physics-system.min.js"></script>
+    
+    <!-- Custom Throw Component -->
+    <script src="throw.js"></script>
+    
+    <style>
+      body { margin: 0; }
+    </style>
+  </head>
+  
+  <body>
+    <!-- A-Frame Scene -->
+    <a-scene physics background="color: #000">
+      
+      <!-- Asset Management System -->
+      <a-assets>
+        <!-- GLTF Model for Bowling Pin -->
+        <a-asset-item id="bowling-pin" src="assets/bowling_pin/scene.gltf"></a-asset-item>
+      </a-assets>
+
+      <!-- Bowling Alley with Neon Glowing Lanes -->
+      <a-box position="0 0 0" depth="20" height="0.1" width="5" color="#222"></a-box>
+      <a-box position="-2 0.05 0" depth="20" height="0.02" width="0.2" color="#ff00ff" material="emissive: #ff00ff; emissiveIntensity: 0.8;"></a-box>
+      <a-box position="2 0.05 0" depth="20" height="0.02" width="0.2" color="#00ffff" material="emissive: #00ffff; emissiveIntensity: 0.8;"></a-box>
+      
+      <!-- Bowling Pins using GLTF models with glowing effect - moved closer -->
+      <a-entity id="pins">
+        <a-entity gltf-model="#bowling-pin" position="-0.5 0 -8" scale="3 3 3" material="emissive: #ffffff; emissiveIntensity: 0.5;" static-body></a-entity>
+        <a-entity gltf-model="#bowling-pin" position="0 0 -8" scale="3 3 3" material="emissive: #ffffff; emissiveIntensity: 0.5;" static-body></a-entity>
+        <a-entity gltf-model="#bowling-pin" position="0.5 0 -8" scale="3 3 3" material="emissive: #ffffff; emissiveIntensity: 0.5;" static-body></a-entity>
+        <a-entity gltf-model="#bowling-pin" position="-0.25 0 -8.5" scale="3 3 3" material="emissive: #ffffff; emissiveIntensity: 0.5;" static-body></a-entity>
+        <a-entity gltf-model="#bowling-pin" position="0.25 0 -8.5" scale="3 3 3" material="emissive: #ffffff; emissiveIntensity: 0.5;" static-body></a-entity>
+        <a-entity gltf-model="#bowling-pin" position="0 0 -9" scale="3 3 3" material="emissive: #ffffff; emissiveIntensity: 0.5;" static-body></a-entity>
+      </a-entity>
+
+      <!-- Bowling Ball with Neon Glow -->
+      <a-sphere id="bowling-ball" position="0 0.2 9" radius="0.2" color="#ff3333" material="emissive: #ff3333; emissiveIntensity: 1;" bowling-balls dynamic-body></a-sphere>
+      
+      <!-- Camera with a-cursor -->
+      <a-camera position="0 1.6 15" id="camera" wasd-controls="acceleration: 100">
+        <!-- Add the a-cursor -->
+        <a-cursor color="white"></a-cursor>
+      </a-camera>
+
+      <!-- Lighting -->
+      <a-light type="directional" position="1 2 1" intensity="0.5" color="#fff"></a-light>
+      <a-light type="ambient" color="#222"></a-light>
+
+      <!-- Spotlight above the bowling lane to create a club vibe -->
+      <a-entity light="type: spot; color: #ff00ff; intensity: 1; angle: 30" position="0 5 0" target="#pins"></a-entity>
+      
+      <!-- Additional disco-like lighting -->
+      <a-light type="point" position="-3 2 5" color="#00ff00" intensity="0.8" distance="15"></a-light>
+      <a-light type="point" position="3 2 5" color="#ff00ff" intensity="0.8" distance="15"></a-light>
+      <a-light type="point" position="0 2 -10" color="#0000ff" intensity="0.8" distance="15"></a-light>
+
+      
+      
+    </a-scene>
+  </body>
+</html>
